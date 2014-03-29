@@ -17,3 +17,9 @@ Then(/^I am given a filtered version of the requested page$/) do
   page.body.should_not match(/this is irrelevant/i)
   page.body.should_not match(/\btrans\b/i)
 end
+
+Then(/^any links in the page are routed through transgress$/) do
+  uri = URI(current_url)
+  page.body.should_not match(/href="\/internal_link.html"/i)
+  page.body.should match(/href="\/visit\/http%3A%2F%2Fwww.derp-relephancy.com%2Finternal_link.html"/)
+end

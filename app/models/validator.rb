@@ -1,7 +1,7 @@
 class Validator
   class << self
     def validate(page)
-      page =~ /trans/
+      page.body =~ /trans/
     end
   end
 end
