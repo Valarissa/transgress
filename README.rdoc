@@ -1,6 +1,6 @@
 == Transgress
 
-The ones who mast need to access trans-related services and information, the most vulnerable among us, are often the ones
+The ones who most need to access trans-related services and information, the most vulnerable among us, are often the ones
 with the least access to these sites. As governments and public networks begin to add content filtering services to their
 open networks, transient trans people and trans youth who have not come out find their access to critical resources dwindling.
 Many content systems overzealously block sites even tangentially mentioning trans people or the issues they face. When
