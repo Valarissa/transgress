@@ -2,23 +2,25 @@ class Page
   class << self
     attr_accessor
     def get_page(url)
-      new(URI(url))
+      new(url)
     end
 
   end
 
   attr_reader :host, :body
 
-  def initialize(uri)
-    self.uri = uri
-    set_request_defaults
-    @body = Request.get(uri)
+  def initialize(url)
+    self.uri = URI(fill_in_url_details(url))
+    self.body = Nokogiri::HTML(Request.get(uri))
     validate!
   end
 
   def validate!
-    return Sanitizer.sanitize(self) if Validator.validate(self)
-    @body = "This is irrelevant"
+    if Validator.validate(self.body)
+      Sanitizer.sanitize(self)
+    else
+      self.body = Nokogiri::HTML("<html><head>IRRELEVANT</head><body>This is irrelevant</body></html>")
+    end
   end
 
   def root
@@ -39,10 +41,18 @@ class Page
     url += "##{uri.fragment}" if uri.fragment
   end
 
+  def to_s
+    body.root.to_s
+  end
+
   private
     attr_accessor :uri
+    attr_writer :body
 
-    def set_request_defaults
-      self.uri.scheme = "http" unless uri.scheme
+    def fill_in_url_details(url)
+      uri = URI(url)
+      uri = URI(url = "http://#{url}") unless uri.scheme
+      uri = URI(url = "#{url}/") if uri.path.empty?
+      uri
     end
 end

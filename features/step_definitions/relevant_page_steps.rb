@@ -4,7 +4,7 @@ When(/^I attempt to access a relevant page$/) do
   visit('/visit/http%3A%2F%2Fwww.trans-relephancy.com%2F')
 end
 
-When(/^I enter "([^"]*)" into the text box$/) do |site_url|
+When(/^I enter "([^"]*)"$/) do |site_url|
   f = File.open("#{File.dirname(__FILE__)}/../fixtures/relevant.html")
   FakeWeb.register_uri(:get, "http://www.trans-relephancy.com/", :body => f.read)
   visit('/visit/')
@@ -14,12 +14,22 @@ end
 
 Then(/^I am given a filtered version of the requested page$/) do
   f = File.open("#{File.dirname(__FILE__)}/../fixtures/relevant.html")
-  page.body.should_not match(/this is irrelevant/i)
-  page.body.should_not match(/\btrans\b/i)
+  within('//body') do |body|
+    body.should_not have_content('this is irrelevant')
+    body.should_not have_content('trans')
+  end
 end
 
 Then(/^any links in the page are routed through transgress$/) do
-  uri = URI(current_url)
-  page.body.should_not match(/href="\/internal_link.html"/i)
-  page.body.should match(/href="\/visit\/http%3A%2F%2Fwww.derp-relephancy.com%2Finternal_link.html"/)
+  all('a').each do |a|
+    a[:href].should_not match("/internal_link.html")
+    a[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_link.html")
+  end
+end
+
+Then(/^any stylesheets in the page are routed through transgress$/) do
+  all('link').each do |l|
+    l[:href].should_not match("/internal_css.css")
+    l[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
+  end
 end
