@@ -18,3 +18,6 @@ Feature:  As a user
     When I enter "www.trans-relephancy.com/page"
     Then any stylesheets in the page are routed through transgress
 
+  Scenario: The website I visit has images
+    When I enter "www.trans-relephancy.com/page"
+    Then any images are routed through transgress

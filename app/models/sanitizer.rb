@@ -11,25 +11,33 @@ class Sanitizer
   end
 
   def sanitize
-    replace_anchors
-    replace_links
+    redirect_anchors
+    redirect_links
+    redirect_images
     replace_text
   end
 
   private
     attr_accessor :doc, :page
 
-    def replace_anchors
+    def redirect_anchors
       doc.xpath('//a').each do |a|
         a['href'] = a['href'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
         a['href'] = a['href'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
       end
     end
 
-    def replace_links
+    def redirect_links
       doc.xpath('//link').each do |l|
-        l['href'] = l['href'].gsub(/\/(.*)/, '/visit/'+page.url_safe_root+'\1')
+        l['href'] = l['href'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
         l['href'] = l['href'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
+      end
+    end
+
+    def redirect_images
+      doc.xpath('//img').each do |i|
+        i['src'] = i['src'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
+        i['src'] = i['src'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
       end
     end
 

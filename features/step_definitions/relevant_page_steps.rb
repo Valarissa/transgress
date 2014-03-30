@@ -21,15 +21,16 @@ Then(/^I am given a filtered version of the requested page$/) do
 end
 
 Then(/^any links in the page are routed through transgress$/) do
-  find(:css, "a[name='relative']")[:href].should_not match(/$relative_link.html/)
-  find(:css, "a[name='relative']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_link.html")
-  find(:css, "a[name='absolute']")[:href].should_not match("/internal_link.html")
-  find(:css, "a[name='absolute']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_link.html")
+  find(:css, "a[name='relative_link']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_link.html")
+  find(:css, "a[name='absolute_link']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_link.html")
 end
 
 Then(/^any stylesheets in the page are routed through transgress$/) do
-  find(:css, "link[name='relative_css']")[:href].should_not match(/$relative_css.css/)
   find(:css, "link[name='relative_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_css.css")
-  find(:css, "link[name='absolute_css']")[:href].should_not match("/internal_css.css")
   find(:css, "link[name='absolute_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
+end
+
+Then(/^any images are routed through transgress$/) do
+  find(:css, "img[name='relative_img']")[:src].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_img.jpg")
+  find(:css, "img[name='absolute_img']")[:src].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fabsolute_img.jpg")
 end
