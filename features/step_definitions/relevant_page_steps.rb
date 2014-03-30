@@ -28,8 +28,8 @@ Then(/^any links in the page are routed through transgress$/) do
 end
 
 Then(/^any stylesheets in the page are routed through transgress$/) do
-  all('link').each do |l|
-    l[:href].should_not match("/internal_css.css")
-    l[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
-  end
+  find(:css, "link[name='relative_css']")[:href].should_not match(/$relative_css.css/)
+  find(:css, "link[name='relative_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_css.css")
+  find(:css, "link[name='absolute_css']")[:href].should_not match("/internal_css.css")
+  find(:css, "link[name='absolute_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
 end
