@@ -1,28 +1,12 @@
-== README
+== Transgress
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The ones who mast need to access trans-related services and information, the most vulnerable among us, are often the ones with the least access to these sites. As governments and public networks begin to add content filtering services to their open networks, transient trans people and trans youth who have not come out find their access to critical resources dwindling. Many content systems overzealously block sites even tangentially mentioning trans people or the issues they face. When sites offering information that could help ease a person's sense of isolation or suffering are blocked, it directly impacts their safety in a very real sense.
 
-Things you may want to cover:
+Transgress is a simple, easy-to-use proxy service that allows people to access sites that are relevant to trans people. It requests a site from an unfiltered location, checks to see if it is relevant to trans issues, replaces any potentially flagged words, and sends the page on to the requester. In addition to the standard content of the page, a javascript file is also included, that, upon the page loading completely, repairs the word replacements, restoring the content to its original state. Any links and content that is part of the site being browsed, is also run through transgress, so you should be able to browse, as normal, without worrying about any technical details.
 
-* Ruby version
+Built into the system is a relatively simple content checking service. If a site does not appear to be related to trans issues and people, the page served up will be a simple page describing the fact that this service should not be used for unintended purposes. This should hopefully prevent the service from being flagged by content filter providers as potentially problematic. It is my hope, that if this service is flagged, that another instance can be created for continued public usage. Furthermore, such a banning could be a jumping off point to begin discussing with these providers about how these services can harm already disadvantaged people, and create a dialogue for balancing security and safety in a responsible manner.
 
-* System dependencies
+It is my hope that Transgress will continue to develop to become increasingly robust so that those who need the resources available on the internet can access them in a safe and convenient way.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Feel free to contact the maintainers of this project by opening an issue in the github repo located at https://github.com/Valarissa/transgress
+Pull requests are also, not only welcome, but actively encouraged!
