@@ -9,6 +9,8 @@ Transgress::Application.routes.draw do
   get   '/visit/:page', to: 'visits#show', constraints: { page: /[\w%.-]*/ }
   post  '/visit', to: 'visits#show'
 
+  root 'visits#index'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
