@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class Page
   class << self
     attr_accessor
