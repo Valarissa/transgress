@@ -26,11 +26,18 @@ Then(/^any links in the page are routed through transgress$/) do
 end
 
 Then(/^any stylesheets in the page are routed through transgress$/) do
-  find(:css, "link[name='relative_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_css.css")
-  find(:css, "link[name='absolute_css']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
+  find(:css, "link[title='relative_css']", visible: false)[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_css.css")
+  find(:css, "link[title='absolute_css']", visible: false)[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_css.css")
 end
 
 Then(/^any images are routed through transgress$/) do
   find(:css, "img[name='relative_img']")[:src].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_img.jpg")
   find(:css, "img[name='absolute_img']")[:src].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fabsolute_img.jpg")
+end
+
+Then(/^any scripts are routed through transgress$/) do
+  all(:css, 'script', visible: false).each do |s|
+    s[:src].should_not match(/^\/absolute/)
+    s[:src].should_not match(/^relative/)
+  end
 end

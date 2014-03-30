@@ -14,6 +14,7 @@ class Sanitizer
     redirect_anchors
     redirect_links
     redirect_images
+    redirect_scripts
     replace_text
   end
 
@@ -38,6 +39,13 @@ class Sanitizer
       doc.xpath('//img').each do |i|
         i['src'] = i['src'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
         i['src'] = i['src'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
+      end
+    end
+
+    def redirect_scripts
+      doc.xpath('//script').each do |s|
+        s['src'] = s['src'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
+        s['src'] = s['src'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
       end
     end
 
