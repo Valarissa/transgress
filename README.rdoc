@@ -1,5 +1,7 @@
 == Transgress
 
+=== Please Note: This is not a finished product yet, scroll down to the bottom to find out how you can help!
+
 The ones who most need to access trans-related services and information, the most vulnerable among us, are often the ones
 with the least access to these sites. As governments and public networks begin to add content filtering services to their
 open networks, transient trans people and trans youth who have not come out find their access to critical resources dwindling.
@@ -21,6 +23,8 @@ problematic. It is my hope, that if this service is flagged, that another instan
 Furthermore, such a banning could be a jumping off point to begin discussing with these providers about how these services
 can harm already disadvantaged people, and create a dialogue for balancing security and safety in a responsible manner.
 
+== How YOU can help
+
 It is my hope that Transgress will continue to develop to become increasingly robust so that those who need the resources
 available on the internet can access them in a safe and convenient way.
 
@@ -28,3 +32,9 @@ Feel free to contact the maintainers of this project by opening an issue in the 
 https://github.com/Valarissa/transgress
 
 Pull requests are also, not only welcome, but actively encouraged!
+
+The regular expressions to do replacement/content checking need to be created to cover a broader set of terms. Additionally,
+there needs to be significant work in order to streamline the code so adding those regular expressions is as easy as possible.
+If you know quite a bit about cross-site scripting, I'd love to talk to see if it would be possible to address certain XSS
+issues currently present. If you want some additional feature of some sort, by all means, create an issue and we'll talk about
+the potential of adding it!
