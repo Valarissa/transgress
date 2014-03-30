@@ -59,9 +59,8 @@ class Sanitizer
 
     def replace_text
       doc.xpath('//text()').each do |text|
-        p text.parent.name
         next if text.parent.name =~ /script/i
-        text.content = text.content.gsub(/trans/i, "derp")
+        text.content = text.content.gsub(/trans/i, "~*0*~")
       end
     end
 end
