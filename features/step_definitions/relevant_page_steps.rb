@@ -6,7 +6,7 @@ end
 
 When(/^I enter "([^"]*)"$/) do |site_url|
   f = File.open("#{File.dirname(__FILE__)}/../fixtures/relevant.html")
-  FakeWeb.register_uri(:get, "http://www.trans-relephancy.com/", :body => f.read)
+  FakeWeb.register_uri(:get, Page.fill_in_url_details(site_url), :body => f.read)
   visit('/visit/')
   fill_in "page", with: site_url
   click_on "transgress"
@@ -21,10 +21,10 @@ Then(/^I am given a filtered version of the requested page$/) do
 end
 
 Then(/^any links in the page are routed through transgress$/) do
-  all('a').each do |a|
-    a[:href].should_not match("/internal_link.html")
-    a[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_link.html")
-  end
+  find(:css, "a[name='relative']")[:href].should_not match(/$relative_link.html/)
+  find(:css, "a[name='relative']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Fpage%2Frelative_link.html")
+  find(:css, "a[name='absolute']")[:href].should_not match("/internal_link.html")
+  find(:css, "a[name='absolute']")[:href].should match("/visit/http%3A%2F%2Fwww.trans-relephancy.com%2Finternal_link.html")
 end
 
 Then(/^any stylesheets in the page are routed through transgress$/) do

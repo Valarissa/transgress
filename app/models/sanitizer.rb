@@ -21,13 +21,14 @@ class Sanitizer
 
     def replace_anchors
       doc.xpath('//a').each do |a|
-        a['href'] = a['href'].gsub(/\/([^"']*)/, '/visit/'+page.url_safe_url+'\1')
+        a['href'] = a['href'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
+        a['href'] = a['href'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
       end
     end
 
     def replace_links
       doc.xpath('//link').each do |l|
-        l['href'] = l['href'].gsub(/\/([^"']*)/, '/visit/'+page.url_safe_url+'\1')
+        l['href'] = l['href'].gsub(/\/(.*)/, '/visit/'+page.url_safe_root+'\1')
       end
     end
 
