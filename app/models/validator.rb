@@ -1,7 +1,15 @@
 class Validator
+  VALIDATION_REGEXES = [
+    /trans/i,
+    /tranny/i
+  ]
   class << self
     def validate(document)
-      document.root.content =~ /trans/
+      VALIDATION_REGEXES.each do |validator|
+        return true if document.root.content =~ validator
+      end
+
+      false
     end
   end
 end
