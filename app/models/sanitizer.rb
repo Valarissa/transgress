@@ -21,40 +21,29 @@ class Sanitizer
   private
     attr_accessor :doc, :page
 
-    def redirect_anchors
-      doc.xpath('//a').each do |a|
-        next unless a['href']
-        next if a['href'] =~ /:\/\//
-        a['href'] = a['href'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
-        a['href'] = a['href'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
+    def replace_element_attribute(element, attribute)
+      doc.xpath("//#{element}").each do |tag|
+        next unless tag[attribute]
+        next if tag[attribute] =~ /:\/\//
+        tag[attribute] = tag[attribute].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
+        tag[attribute] = tag[attribute].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
       end
+    end
+
+    def redirect_anchors
+      replace_element_attribute('a', 'href')
     end
 
     def redirect_links
-      doc.xpath('//link').each do |l|
-        next unless l['href']
-        next if l['href'] =~ /:\/\//
-        l['href'] = l['href'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
-        l['href'] = l['href'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
-      end
+      replace_element_attribute('link', 'href')
     end
 
     def redirect_images
-      doc.xpath('//img').each do |i|
-        next unless i['src']
-        next if i['src'] =~ /:\/\//
-        i['src'] = i['src'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
-        i['src'] = i['src'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
-      end
+      replace_element_attribute('img', 'src')
     end
 
     def redirect_scripts
-      doc.xpath('//script').each do |s|
-        next unless s['src']
-        next if s['src'] =~ /:\/\//
-        s['src'] = s['src'].gsub(/^\/(.*)/, '/visit/'+page.url_safe_root+'\1')
-        s['src'] = s['src'].gsub(/^([^\/].*)/, '/visit/'+page.url_safe_url+'\1')
-      end
+      replace_element_attribute('script', 'src')
     end
 
     def replace_text
