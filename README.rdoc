@@ -33,8 +33,11 @@ https://github.com/Valarissa/transgress
 
 Pull requests are also, not only welcome, but actively encouraged!
 
-The regular expressions to do replacement/content checking need to be created to cover a broader set of terms. Additionally,
-there needs to be significant work in order to streamline the code so adding those regular expressions is as easy as possible.
 If you know quite a bit about cross-site scripting, I'd love to talk to see if it would be possible to address certain XSS
 issues currently present. If you want some additional feature of some sort, by all means, create an issue and we'll talk about
 the potential of adding it!
+
+Adding a new term to search for or replace is INCREDIBLY easy. Just add things to
+https://github.com/Valarissa/transgress/blob/master/lib/assets/string_list.json
+and send the additions as a pull request. That's it. SUPER simple. With a few more additions to the JS code and some changes
+to the views, this project will be working as it's intended.
