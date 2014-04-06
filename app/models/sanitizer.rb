@@ -49,7 +49,7 @@ class Sanitizer
     def replace_text
       doc.xpath('//text()').each do |text|
         next if text.parent.name =~ /script/i
-        Validator::VALIDATION_REGEXES.each_with_index do |regex, i|
+        Validator::regexes.each_with_index do |regex, i|
           text.content = text.content.gsub(regex, "~*#{i}*~")
         end
       end
