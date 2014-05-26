@@ -59,6 +59,10 @@ class Sanitizer
     end
 
     def append_translator
+      jQ = Nokogiri::XML::Node.new('script', doc)
+      jQ['src'] = "//code.jquery.com/jquery-1.11.0.min.js"
+      doc.xpath('//head')[0].children.first.before(jQ)
+
       script = Nokogiri::XML::Node.new('script', doc)
       script['src'] = "/assets/transgression.js"
       doc.xpath('//head')[0].children.last.after(script)
