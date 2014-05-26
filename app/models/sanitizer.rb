@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class Sanitizer
   class << self
     def sanitize(doc)
@@ -16,6 +18,7 @@ class Sanitizer
     redirect_images
     redirect_scripts
     replace_text
+    append_translator
   end
 
   private
@@ -53,5 +56,11 @@ class Sanitizer
           text.content = text.content.gsub(regex, "~*#{i}*~")
         end
       end
+    end
+
+    def append_translator
+      script = Nokogiri::XML::Node.new('script', doc)
+      script['src'] = "/assets/transgression.js"
+      doc.xpath('//head')[0].children.last.after(script)
     end
 end
