@@ -166,6 +166,7 @@ DEPENDENCIES
   fakeweb
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   pg
   rails (= 4.0.4)
   rails_12factor

@@ -42,6 +42,8 @@ gem 'rails_12factor'
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'nokogiri'
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
