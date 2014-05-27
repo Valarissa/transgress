@@ -64,7 +64,7 @@ class Sanitizer
       doc.xpath('//head')[0].children.first.before(jQ)
 
       script = Nokogiri::XML::Node.new('script', doc)
-      script['src'] = "/assets/transgression.js"
+      script['src'] = ApplicationController.helpers.asset_path("application.js")
       doc.xpath('//head')[0].children.last.after(script)
     end
 end
