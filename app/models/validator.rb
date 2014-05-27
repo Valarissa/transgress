@@ -1,8 +1,10 @@
 class Validator
   class << self
     def validate(document)
+      content = document.root.content
+      content.encode!('UTF-8', 'UTF-8', :invalid => :replace)
       regexes.each do |validator|
-        return true if document.root.content =~ validator
+        return true if content =~ validator
       end
 
       false
