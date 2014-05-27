@@ -38,6 +38,6 @@ issues currently present. If you want some additional feature of some sort, by a
 the potential of adding it!
 
 Adding a new term to search for or replace is INCREDIBLY easy. Just add things to
-https://github.com/Valarissa/transgress/blob/master/lib/assets/javascripts/string_list.json
+https://github.com/Valarissa/transgress/blob/master/public/assets/string_list.json
 and send the additions as a pull request. That's it. SUPER simple. With a few more additions to the JS code and some changes
 to the views, this project will be working as it's intended.
