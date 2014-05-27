@@ -1,4 +1,12 @@
-<%= form_tag "/visit" do %>
-  <label for="page">Site URL</label><input type="text" name="page" id="page" />
-  <input type="submit" value="Transgress" name="transgress" id="transgress" />
-<% end %>
+<div id="top" class="header">
+  <div class="vert-text">
+    <%= form_tag "/visit", class: "form-inline", role: "form" do %>
+      <div class="form-group">
+        <label class="sr-only" for="page">Enter Site URL</label>
+        <input class="form-control" placeholder="Enter Site URL" type="text" name="page" id="page">
+
+        <button type="submit" class="btn btn-default">transgress</button>
+      </div>
+    <% end %>
+  </div>
+</div>
