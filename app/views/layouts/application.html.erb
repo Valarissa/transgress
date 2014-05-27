@@ -1,1 +1,42 @@
-<%= yield %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Transgress</title>
+
+    <!-- Bootstrap core CSS -->
+    <%= stylesheet_link_tag "bootstrap" %>
+    <%= stylesheet_link_tag "design" %>
+    <%= stylesheet_link_tag "font-awesome" %>
+  </head>
+
+  <body>
+    <div id="top" class="header">
+      <div class="vert-text">
+        <%= yield %>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            <ul class="list-inline">
+              <li>
+                <a href="https://github.com/Valarissa/transgress">
+                  <i class="fa fa-github fa-3x"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- /Footer -->
+
+    <!-- JavaScript -->
+    <%= javascript_include_tag "jquery" %>
+    <%= javascript_include_tag "bootstrap" %>
+  </body>
+</html>
