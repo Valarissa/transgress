@@ -41,3 +41,28 @@ Adding a new term to search for or replace is INCREDIBLY easy. Just add things t
 https://github.com/Valarissa/transgress/blob/master/public/assets/string_list.json
 and send the additions as a pull request. That's it. SUPER simple. With a few more additions to the JS code and some changes
 to the views, this project will be working as it's intended.
+
+== Development
+
+=== Getting started—first time set up
+
+* Check out source code.
+  
+* Set up your ruby environment.
+
+  There are many options for installing the version of ruby used by this project (currently 2.1.0). Here’s how to do it with rbenv:
+
+    rbenv install
+
+  See also docs for rbenv[https://github.com/sstephenson/rbenv], RVM[https://rvm.io/], chruby[https://github.com/postmodern/chruby]
+
+* Install gems.
+
+    gem install bundler
+    bundle install
+
+=== Starting the app
+
+  bundle exec rackup
+
+Open http://localhost:9292 in your browser.
