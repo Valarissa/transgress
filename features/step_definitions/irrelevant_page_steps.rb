@@ -5,5 +5,5 @@ When(/^I attempt to access an irrelevant page$/) do
 end
 
 Then(/^I am told the page is not relevant$/) do
-  page.body.should match(/this is irrelevant/i)
+  expect(page.body).to match(/this is irrelevant/i)
 end
