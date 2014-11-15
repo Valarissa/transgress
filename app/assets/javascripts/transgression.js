@@ -1,24 +1,25 @@
 jQuery(unencodeTransgressions);
 
 function unencodeTransgressions(){
-  var transgressions
-    , $body = jQuery('body')[0];
+  jQuery.getJSON("/assets/string_list.json", null, function(data){
+    var transgressions;
 
-  jQuery.getJSON("/assets/string_list.json", function(data){
-    transgressions = data;
-    nodes = getTextNodesIn(document.getElementsByTagName('body')[0], false);
-    var node_length = nodes.length;
-    for(var i = 0; i < node_length; i++){
-      nodes[i].nodeValue = alterText(nodes[i].nodeValue, transgressions);
-    }
-  });
+    transgressions = data["safe"].concat(data["flagged"]);
+    unencodeTextIn('body', transgressions);
+    unencodeTextIn('head', transgressions);
+  }).done(function(){ console.log("idiocy"); });
+}
+
+function unencodeTextIn(tag, transgressions){
+  nodes = getTextNodesIn(document.getElementsByTagName(tag)[0], false);
+  var node_length = nodes.length;
+  for(var i = 0; i < node_length; i++){
+    nodes[i].nodeValue = alterText(nodes[i].nodeValue, transgressions);
+  }
 }
 
 function alterText(v, transgressions) {
-  console.log(typeof(v));
   return v.replace(/~\*(\d*)\*~/g, function(match, value){
-    console.log(value);
-    console.log(transgressions[parseInt(value)])
     return transgressions[parseInt(value)];
   });
 }

@@ -65,6 +65,7 @@ class Sanitizer
 
       script = Nokogiri::XML::Node.new('script', doc)
       script['src'] = ApplicationController.helpers.asset_path("application.js")
+      script['type'] = "text/javascript"
       doc.xpath('//head')[0].children.last.after(script)
     end
 end

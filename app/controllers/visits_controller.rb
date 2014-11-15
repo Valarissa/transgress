@@ -4,6 +4,6 @@ class VisitsController < ApplicationController
 
   def show
     @response = Page.get_page(params[:page])
-    render inline: @response.to_s 
+    render inline: @response.to_s
   end
 end
