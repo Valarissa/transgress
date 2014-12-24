@@ -105,7 +105,7 @@ describe Validator do
       bool.should eql false
     end
 
-    it "validate returns false if content is not valid" do
+    it "validate returns true if content is redeemed" do
       uri = "http://www.autostraddle.com"
 
       stub_request(:any, uri)
