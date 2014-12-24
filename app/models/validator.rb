@@ -8,11 +8,13 @@ class Validator
         return true if content =~ validator
       end
 
-      check_flagged_terms(content)
+      check_no_flagged_terms(content)
     end
 
-    def check_flagged_terms(content)
+    def check_no_flagged_terms(content)
       potential = false
+      no_flagged_content = true
+
       flagged_regexes.each do |validator|
         if content =~ validator
           potential = true
@@ -22,11 +24,13 @@ class Validator
 
       if potential
         redemption_regexes.each do |validator|
-          return true if content =~ validator
+          if content !=~ validator
+            no_flagged_content = false
+          end
         end
       end
 
-      false
+      return no_flagged_content
     end
 
     def regexes

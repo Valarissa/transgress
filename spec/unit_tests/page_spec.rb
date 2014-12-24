@@ -3,6 +3,7 @@ require 'nokogiri'
 
 describe Page do
   before :each do
+    WebMock.allow_net_connect! 
     @page = Page.new "http://www.autostraddle.com"
   end
 
