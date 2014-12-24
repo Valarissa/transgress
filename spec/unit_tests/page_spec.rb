@@ -11,5 +11,4 @@ describe Page do
       @page.should be_an_instance_of Page
     end
   end
-
 end
