@@ -76,5 +76,48 @@ describe Validator do
       bool = Validator.check_no_flagged_terms(content)
       bool.should eql true
     end
+
+    it "validate returns true if content is valid" do
+      uri = "http://www.autostraddle.com"
+
+      stub_request(:any, uri)
+      .to_return(:body => "This content is about transgender issues.",
+      :status => 200)
+
+      document = Nokogiri::HTML(Request.get(uri))
+
+      bool = Validator.validate(document)
+
+      bool.should eql true
+    end
+
+    it "validate returns false if content is not valid" do
+      uri = "http://www.autostraddle.com"
+
+      stub_request(:any, uri)
+      .to_return(:body => "This content uses messed-up terms like shemale.",
+      :status => 200)
+
+      document = Nokogiri::HTML(Request.get(uri))
+
+      bool = Validator.validate(document)
+
+      bool.should eql false
+    end
+
+    it "validate returns false if content is not valid" do
+      uri = "http://www.autostraddle.com"
+
+      stub_request(:any, uri)
+      .to_return(:body => "This content understands a term like shemale is a
+        slur.",
+      :status => 200)
+
+      document = Nokogiri::HTML(Request.get(uri))
+
+      bool = Validator.validate(document)
+
+      bool.should eql true
+    end
   end
 end
