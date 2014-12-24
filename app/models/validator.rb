@@ -18,14 +18,15 @@ class Validator
       flagged_regexes.each do |validator|
         if content =~ validator
           potential = true
+          no_flagged_content = false
           break
         end
       end
 
       if potential
         redemption_regexes.each do |validator|
-          if content !=~ validator
-            no_flagged_content = false
+          if content =~ validator
+            no_flagged_content = true
           end
         end
       end

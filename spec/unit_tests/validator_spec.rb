@@ -62,5 +62,19 @@ describe Validator do
       bool = Validator.check_no_flagged_terms(content)
       bool.should eql false
     end
+
+    it "check no flagged terms returns true if content is flagged & redeemed" do
+      uri = "http://www.autostraddle.com"
+
+      stub_request(:any, uri)
+      .to_return(:body => "This content understands tranny is a slur.",
+      :status => 200)
+
+      content = Nokogiri::HTML(Request.get(uri)).root.content
+      content.encode!('UTF-8', 'UTF-8', :invalid => :replace)
+
+      bool = Validator.check_no_flagged_terms(content)
+      bool.should eql true
+    end
   end
 end
