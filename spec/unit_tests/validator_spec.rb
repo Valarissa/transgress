@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe Validator do
   before :each do
-    @safe_terms = 5
-    @flagged_terms = 2
-    @redemption_terms = 2
+    filename = Rails.root + 'public/assets/string_list.json'
+    terms = JSON.parse(File.open(filename).read)
+
+    @safe_terms = terms["safe"].count
+    @flagged_terms = terms["flagged"].count
+    @redemption_terms = terms["redemption"].count
 
     @validator = Validator.new
   end
