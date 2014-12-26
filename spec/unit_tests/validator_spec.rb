@@ -16,28 +16,38 @@ describe Validator do
     it "takes no parameters and returns a Validator object" do
       @validator.should be_an_instance_of Validator
     end
+  end
 
+  describe "#regexes" do
     it "regexes includes all safe and flagged terms" do
        current_count_of_safe_and_flagged_terms = @safe_terms + @flagged_terms
        regexps = Validator.regexes
        regexps.length.should eql current_count_of_safe_and_flagged_terms
     end
+  end
 
+  describe "#safe_regexes" do
     it "safe regexes includes all safe terms" do
       regexps = Validator.safe_regexes
       regexps.length.should eql @safe_terms
     end
+  end
 
+  describe "#flagged_regexes" do
     it "flagged regexes includes all flagged terms" do
       regexps = Validator.flagged_regexes
       regexps.length.should eql @flagged_terms
     end
+  end
 
+  describe "#redemption_regexes" do
     it "redemption regexes includes all safe terms" do
       regexps = Validator.redemption_regexes
       regexps.length.should eql @redemption_terms
     end
+  end
 
+  describe "#check_no_flagged_terms" do
     it "check no flagged terms returns true if content is not flagged" do
       uri = "http://www.autostraddle.com"
 
@@ -79,7 +89,9 @@ describe Validator do
       bool = Validator.check_no_flagged_terms(content)
       bool.should eql true
     end
+  end
 
+  describe "#validate" do
     it "validate returns true if content is valid" do
       uri = "http://www.autostraddle.com"
 
